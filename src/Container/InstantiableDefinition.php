@@ -4,12 +4,14 @@ namespace Bcchicr\StudentList\Container;
 
 use ReflectionClass;
 use ReflectionNamedType;
+use ReflectionParameter;
+use Bcchicr\StudentList\Container\Exceptions\ContainerException;
+use Bcchicr\StudentList\Container\Exceptions\ContainerNotFoundException;
 use Bcchicr\StudentList\Container\Exceptions\DefinitionBindingException;
 
 class InstantiableDefinition implements Definition
 {
     public function __construct(
-        protected string $id,
         private ReflectionClass $reflection
     ) {
     }
@@ -26,15 +28,24 @@ class InstantiableDefinition implements Definition
         }
         $dependencies = array_map(
             function ($param) use ($container) {
-                $paramType = $param->getType();
-                if (!$paramType instanceof ReflectionNamedType) {
-                    throw new DefinitionBindingException("Cannot resolve dependency {$param->getName()} in class {$param->getDeclarationClass()->getName()}");
+                if ($this->isParamResolvable($param)) {
+                    throw new DefinitionBindingException("Cannot resolve dependency '{$param->getName()}' in class '{$param->getDeclaringClass()->getName()}'");
                 }
-                $instance = $container->get($paramType->getName());
+                try {
+                    $instance = $container->get($param->getType()->getName());
+                } catch (ContainerException $e) {
+                    $instance = $param->getDefaultValue();
+                }
                 return $instance;
             },
             $constructParameters
         );
         return $reflector->newInstanceArgs($dependencies);
+    }
+    private function isParamResolvable(ReflectionParameter $param): bool
+    {
+        $paramType = $param->getType();
+        return (!$param->isDefaultValueAvailable() &&
+            (!$paramType instanceof ReflectionNamedType || $paramType->isBuiltin()));
     }
 }

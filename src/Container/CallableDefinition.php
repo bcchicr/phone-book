@@ -2,15 +2,18 @@
 
 namespace Bcchicr\StudentList\Container;
 
+use Closure;
+
 class CallableDefinition implements Definition
 {
+    private Closure $callback;
     public function __construct(
-        protected string $id,
-        protected mixed $value,
+        callable $callback
     ) {
+        $this->callback = Closure::fromCallable($callback);
     }
     public function resolve(Container $container): mixed
     {
-        return call_user_func($this->value, $container);
+        return call_user_func($this->callback, $container);
     }
 }

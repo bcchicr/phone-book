@@ -2,8 +2,12 @@
 
 namespace Bcchicr\StudentList\Container;
 
+use Bcchicr\StudentList\Container\Exceptions\ContainerPrepareException;
+use Bcchicr\StudentList\Container\Exceptions\ContainerResolveException;
+use DateTime;
+use PDO;
 use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class ContainerTest extends TestCase
 {
@@ -20,39 +24,48 @@ class ContainerTest extends TestCase
 
         $this->assertTrue($isRegistered);
     }
-    // public function testRegisterAndGet(): void
-    // {
-    //     $container = new Container();
-    //     $string = 'test';
-    //     $int = 1;
-    //     $float = 2.5;
-    //     $bool = false;
-    //     $null = null;
-    //     $array = [true, 2, 3.0, '4', null];
-    //     $callback = function () {
-    //         return "this is callback";
-    //     };
-    //     $className = Container::class;
+    public function testRegisterAndGet(): void
+    {
+        $this->container->register(DateTime::class, fn () => new DateTime());
+        $dateTime1 = $this->container->get(DateTime::class);
+        $dateTime2 = $this->container->get(DateTime::class);
+        $this->assertInstanceOf(DateTime::class, $dateTime1);
+        $this->assertSame($dateTime1, $dateTime2);
 
-    //     $test1 = is_callable($string);
-    //     $test2 = is_callable($array);
-    //     $test3 = is_callable($container);
+        $this->container->register(DateTime::class, fn () => new DateTime());
+        $dateTime3 = $this->container->get(DateTime::class);
+        $this->assertNotSame($dateTime2, $dateTime3);
+    }
+    public function testAutoWiring(): void
+    {
+        $dateTime1 = $this->container->get(DateTime::class);
+        $dateTime2 = $this->container->get(DateTime::class);
 
+        $this->assertInstanceOf(DateTime::class, $dateTime1);
+        $this->assertSame($dateTime1, $dateTime2);
 
-    //     $container->register('string', $string);
-    //     $container->register('array', $array);
-    //     $container->register('callback', $callback);
+        $noConstructor = $this->container->get(NoConstructor::class);
+        $this->assertInstanceOf(NoConstructor::class, $noConstructor);
 
-    //     $this->assertEquals($container->get('string'), $string);
-    //     $this->assertEquals($container->get('int'), $int);
-    //     $this->assertEquals($container->get('float'), $float);
-    //     $this->assertEquals($container->get('bool'), $bool);
-    //     $this->assertNull($container->get('null'));
-    //     $this->assertEquals($container->get('array'), $array);
-    //     $this->assertEquals($container->get('callback'), 'this is callback');
-    //     $container2 = $container->get('className');
-    //     $container3 = $container->get('className');
-    //     $this->assertInstanceOf(Container::class, $container2);
-    //     $this->assertSame($container2, $container3);
-    // }
+        $noParamConstructor = $this->container->get(NoParamConstructor::class);
+        $this->assertInstanceOf(NoParamConstructor::class, $noParamConstructor);
+
+        $dependent = $this->container->get(DependentFromObjects::class);
+        $this->assertInstanceOf(DependentFromObjects::class, $dependent);
+    }
+    public function testNotFound(): void
+    {
+        $this->expectException(NotFoundExceptionInterface::class);
+        $this->container->get('IncorrectID');
+    }
+    public function testPrepare(): void
+    {
+        $this->expectException(ContainerPrepareException::class);
+        $this->container->get(NotInstantiable::class);
+    }
+    public function testResolve(): void
+    {
+        $this->expectException(ContainerResolveException::class);
+        $this->container->get(PDO::class);
+    }
 }

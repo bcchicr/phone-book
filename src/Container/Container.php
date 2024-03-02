@@ -2,10 +2,12 @@
 
 namespace Bcchicr\StudentList\Container;
 
-use Bcchicr\StudentList\Container\Exceptions\ContainerException;
-use Bcchicr\StudentList\Container\Exceptions\ContainerNotFoundException;
-use Psr\Container\ContainerInterface;
 use ReflectionClass;
+use Psr\Container\ContainerInterface;
+use Bcchicr\StudentList\Container\Exceptions\DefinitionException;
+use Bcchicr\StudentList\Container\Exceptions\ContainerPrepareException;
+use Bcchicr\StudentList\Container\Exceptions\ContainerResolveException;
+use Bcchicr\StudentList\Container\Exceptions\ContainerNotFoundException;
 
 class Container implements ContainerInterface
 {
@@ -30,8 +32,13 @@ class Container implements ContainerInterface
         $definition =
             $this->has($id)
             ? $this->definitions[$id]
-            : $this->getInstantiableDefinition($id);
-        $instance = $definition->resolve($this);
+            : $this->prepareDefinition($id);
+
+        try {
+            $instance = $definition->resolve($this);
+        } catch (DefinitionException $e) {
+            throw new ContainerResolveException($e->getMessage());
+        }
         $this->instances[$id] = $instance;
         return $instance;
     }
@@ -48,18 +55,18 @@ class Container implements ContainerInterface
         if ($this->has($id)) {
             unset($this->instances[$id]);
         }
-        $this->definitions[$id] = new CallableDefinition($id, $value);
+        $this->definitions[$id] = new CallableDefinition($value);
     }
 
-    private function getInstantiableDefinition(string $id): InstantiableDefinition
+    private function prepareDefinition(string $id): Definition
     {
         if (!class_exists($id)) {
-            throw new ContainerNotFoundException("Undefined dependency {$id}");
+            throw new ContainerNotFoundException("Undefined dependency '{$id}'");
         }
         $reflection = new ReflectionClass($id);
         if (!$reflection->isInstantiable()) {
-            throw new ContainerException("Class {$id} is not instantiable");
+            throw new ContainerPrepareException("Class '{$id}' is not instantiable");
         }
-        return new InstantiableDefinition($id, $reflection);
+        return new InstantiableDefinition($reflection);
     }
 }

@@ -16,7 +16,7 @@
   "autoload-dev": {
     "psr-4": {
       "Bcchicr\\StudentList\\": [
-        "test/"
+        "tests/"
       ]
     }
   }
