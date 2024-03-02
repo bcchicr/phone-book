@@ -3,9 +3,9 @@
 namespace Bcchicr\StudentList\Container;
 
 use Bcchicr\StudentList\Container\Exceptions\ContainerException;
-use Bcchicr\StudentList\Container\Exceptions\DefinitionException;
+use Bcchicr\StudentList\Container\Exceptions\ContainerNotFoundException;
 use Psr\Container\ContainerInterface;
-use Bcchicr\StudentList\Container\Exceptions\NotFoundException;
+use ReflectionClass;
 
 class Container implements ContainerInterface
 {
@@ -22,48 +22,18 @@ class Container implements ContainerInterface
     {
     }
 
-    private function doGet(string $id): mixed
+    public function get(string $id): mixed
     {
-        if (!$this->has($id)) {
-            throw new NotFoundException("Key {$id} is not defined");
-        }
-
         if (isset($this->instances[$id])) {
             return $this->instances[$id];
         }
-
-        $definition = $this->definitions[$id];
-        if (!$definition->isResolvable()) {
-            return $definition->getValue();
-        }
-
-        try {
-            $instance = $definition->resolve($this);
-        } catch (DefinitionException $e) {
-            throw new ContainerException($e->getMessage());
-        }
-
-        if ($definition->isSingleton()) {
-            $this->instances[$id] = $instance;
-        }
-
+        $definition =
+            $this->has($id)
+            ? $this->definitions[$id]
+            : $this->getInstantiableDefinition($id);
+        $instance = $definition->resolve($this);
+        $this->instances[$id] = $instance;
         return $instance;
-    }
-
-    public function register(
-        string $id,
-        mixed $value,
-        bool $isSingleton = true
-    ): void {
-        if ($this->has($id)) {
-            unset($this->instances[$id]);
-        }
-        $this->definitions[$id] = new Definition($id, $value, $isSingleton);
-    }
-
-    public function get(string $id): mixed
-    {
-        return $this->doGet($id);
     }
 
     public function has(string $id): bool
@@ -71,12 +41,25 @@ class Container implements ContainerInterface
         return isset($this->definitions[$id]);
     }
 
-    public function resolveDependencies(array $dependencies): array
-    {
-        $results = [];
-        foreach ($dependencies as $dependency) {
-            $results[] = $this->doGet($dependency);
+    public function register(
+        string $id,
+        callable $value,
+    ): void {
+        if ($this->has($id)) {
+            unset($this->instances[$id]);
         }
-        return $results;
+        $this->definitions[$id] = new CallableDefinition($id, $value);
+    }
+
+    private function getInstantiableDefinition(string $id): InstantiableDefinition
+    {
+        if (!class_exists($id)) {
+            throw new ContainerNotFoundException("Undefined dependency {$id}");
+        }
+        $reflection = new ReflectionClass($id);
+        if (!$reflection->isInstantiable()) {
+            throw new ContainerException("Class {$id} is not instantiable");
+        }
+        return new InstantiableDefinition($id, $reflection);
     }
 }

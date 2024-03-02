@@ -2,8 +2,10 @@
 
 use Bcchicr\StudentList\Container\Container;
 
-require __DIR__ . '/../vendor/autoload.php';
+// xdebug_info();
+// require __DIR__ . '/../vendor/autoload.php';
 
 // $container = Container::getInstance();
 
-var_dump($container);
+
+// var_dump($container);
