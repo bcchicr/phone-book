@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "76bb14326362646b72f9a0e601914302",
+    "content-hash": "2a8210bc2946cbad4436ab0fc2d62bb9",
     "packages": [
         {
             "name": "bcchicr/di-container",
@@ -52,7 +52,7 @@
             ],
             "support": {
                 "issues": "https://github.com/bcchicr/di-container/issues",
-                "source": "https://github.com/bcchicr/di-container/tree/v0.1.0"
+                "source": "https://github.com/bcchicr/di-container/tree/main"
             },
             "time": "2024-03-03T11:33:22+00:00"
         },

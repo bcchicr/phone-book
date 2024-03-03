@@ -1,6 +1,5 @@
 {
   "require": {
-    "psr/container": "^2.0",
     "bcchicr/di-container": "dev-main"
   },
   "autoload": {
