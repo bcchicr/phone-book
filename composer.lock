@@ -4,8 +4,58 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "424a72c8e10f024fa6ee86decf9ce09b",
+    "content-hash": "76bb14326362646b72f9a0e601914302",
     "packages": [
+        {
+            "name": "bcchicr/di-container",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bcchicr/di-container.git",
+                "reference": "d5b0f891ab3897f0db1a9d2f3c222867df841ff8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bcchicr/di-container/zipball/d5b0f891ab3897f0db1a9d2f3c222867df841ff8",
+                "reference": "d5b0f891ab3897f0db1a9d2f3c222867df841ff8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "psr/container": "^2.0"
+            },
+            "provide": {
+                "psr/container-implementation": "^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^11"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bcchicr\\Container\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A minimal PSR-11 compatible Dependency Injection Container with auto-wiring",
+            "keywords": [
+                "PSR-11",
+                "container",
+                "dependency injection",
+                "psr11"
+            ],
+            "support": {
+                "issues": "https://github.com/bcchicr/di-container/issues",
+                "source": "https://github.com/bcchicr/di-container/tree/v0.1.0"
+            },
+            "time": "2024-03-03T11:33:22+00:00"
+        },
         {
             "name": "psr/container",
             "version": "2.0.2",
@@ -1768,7 +1818,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "bcchicr/di-container": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
