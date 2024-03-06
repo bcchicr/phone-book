@@ -3,6 +3,7 @@
 namespace Bcchicr\StudentList\Http;
 
 use InvalidArgumentException;
+use TypeError;
 
 class Uri
 {
@@ -88,12 +89,7 @@ class Uri
     public function withScheme(string $scheme): static
     {
         $scheme = mb_strtolower($scheme);
-        if ($scheme === $this->scheme) {
-            return $this;
-        }
-        $new = clone $this;
-        $new->scheme = $scheme;
-        return $new;
+        return $this->getInstanceWithNewState('scheme', $scheme);
     }
     public function getAuthority(): string
     {
@@ -120,12 +116,7 @@ class Uri
         if ($userInfo !== '' && $password !== null) {
             $userInfo .= ':' . $password;
         }
-        if ($userInfo === $this->userInfo) {
-            return $this;
-        }
-        $new = clone $this;
-        $new->userInfo = $userInfo;
-        return $new;
+        return $this->getInstanceWithNewState('userInfo', $userInfo);
     }
     public function getHost(): string
     {
@@ -134,12 +125,7 @@ class Uri
     public function withHost(string $host): static
     {
         $host = mb_strtolower($host);
-        if ($host === $this->host) {
-            return $this;
-        }
-        $new = clone $this;
-        $new->host = $host;
-        return $new;
+        return $this->getInstanceWithNewState('host', $host);
     }
     public function getPort(): ?int
     {
@@ -150,12 +136,7 @@ class Uri
         if ($port !== null) {
             $port = $this->filterPort($this->scheme, $port);
         }
-        if ($port === $this->port) {
-            return $this;
-        }
-        $new = clone $this;
-        $new->port = $port;
-        return $new;
+        return $this->getInstanceWithNewState('port', $port);
     }
     public function getPath(): string
     {
@@ -164,12 +145,7 @@ class Uri
     public function withPath(string $path): static
     {
         $path = $this->filterPath($this->getAuthority(), $path);
-        if ($path === $this->path) {
-            return $this;
-        }
-        $new = clone $this;
-        $new->path = $path;
-        return $new;
+        return $this->getInstanceWithNewState('path', $path);
     }
     public function getQuery(): string
     {
@@ -178,12 +154,7 @@ class Uri
     public function withQuery(string $query): static
     {
         $query = $this->urlEncode($query);
-        if ($query === $this->query) {
-            return $this;
-        }
-        $new = clone $this;
-        $new->query = $query;
-        return $new;
+        return $this->getInstanceWithNewState('query', $query);
     }
     public function getFragment(): string
     {
@@ -192,12 +163,7 @@ class Uri
     public function withFragment(string $fragment): static
     {
         $fragment = $this->urlEncode($fragment);
-        if ($fragment === $this->fragment) {
-            return $this;
-        }
-        $new = clone $this;
-        $new->fragment = $fragment;
-        return $new;
+        return $this->getInstanceWithNewState('fragment', $fragment);
     }
     private function filterPath(string $authority, string $path): string
     {
@@ -243,5 +209,21 @@ class Uri
     {
         return isset(self::STANDARD_PORTS[$scheme]) &&
             $port === self::STANDARD_PORTS[$scheme];
+    }
+    private function getInstanceWithNewState(string $property, null|string|int $value)
+    {
+        if (!property_exists($this, $property)) {
+            throw new InvalidArgumentException("Unknown property {$property}");
+        }
+        if ($value === $this->$property) {
+            return $this;
+        }
+        $new = clone $this;
+        try {
+            $new->$property = $value;
+        } catch (TypeError $e) {
+            throw new InvalidArgumentException("2nd argument has unexpected type. {$e->getMessage()}");
+        }
+        return $new;
     }
 }
