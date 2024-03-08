@@ -2,42 +2,73 @@
 
 namespace Bcchicr\StudentList\Http;
 
+
 class Request
 {
+    private array $query = [];
+    private array $cookies = [];
+    private ?array $body;
+    private array $server;
 
-    private InputBag $get;
-    private InputBag $post;
-    private InputBag $cookies;
-    private InputBag $server;
+    private string $method;
+    private Uri $uri;
 
-    private ?string $method = null;
-
-    // private InputBag $server;
-
-
-    private function __construct(
-        array $get = [],
-        array $post = [],
-        array $cookies = [],
-        array $server = [],
+    public function __construct(
+        string $method,
+        string|Uri $uri,
+        ?array $body = null,
+        array $server = []
     ) {
-        $this->get = new InputBag($get);
-        $this->post = new InputBag($post);
-        $this->cookies = new InputBag($cookies);
-        $this->server = new InputBag($server);
-    }
-
-    public static function captureGlobals(): static
-    {
-        return new static($_GET, $_POST, $_COOKIE, $_SERVER);
+        $this->server = $server;
+        if (!$uri instanceof Uri) {
+            $uri = new Uri($uri);
+        }
+        $this->uri = $uri;
+        $this->method = $method;
+        $this->body = $body;
+        parse_str($uri->getQuery(), $this->query);
     }
 
     public function getMethod(): string
     {
-        if (!is_null($this->method)) {
-            return $this->method;
-        }
-        $method = mb_strtoupper($this->server['REQUEST_METHOD'] ?? 'GET');
-        return $this->method = $method;
+        return $this->method;
+    }
+    public function getUri(): Uri
+    {
+        return $this->uri;
+    }
+    public function getServerParams(): array
+    {
+        return $this->server;
+    }
+    public function getCookieParams(): array
+    {
+        return $this->cookies;
+    }
+    public function withCookieParams(array $cookies)
+    {
+        $new = clone $this;
+        $new->cookies = $cookies;
+        return $new;
+    }
+    public function getQuery(): array
+    {
+        return $this->query;
+    }
+    public function withQuery(array $query)
+    {
+        $new = clone $this;
+        $new->query = $query;
+        return $new;
+    }
+    public function getBody(): array
+    {
+        return $this->body;
+    }
+    public function withBody(?array $body)
+    {
+        $new = clone $this;
+        $new->body = $body;
+        return $new;
     }
 }

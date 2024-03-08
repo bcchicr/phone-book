@@ -4,6 +4,6 @@ namespace Bcchicr\StudentList\Http\Exception;
 
 use UnexpectedValueException;
 
-class InvalidOffsetException extends UnexpectedValueException
+class InvalidArgumentException extends UnexpectedValueException
 {
 }

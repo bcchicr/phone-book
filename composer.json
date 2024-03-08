@@ -1,7 +1,8 @@
 {
   "require": {
-    "bcchicr/di-container": "^1.0",
-    "psr/http-message": "^2.0"
+    "bcchicr/di-container": "^1",
+    "psr/http-message": "^2.0",
+    "psr/http-factory": "^1.0"
   },
   "autoload": {
     "psr-4": {

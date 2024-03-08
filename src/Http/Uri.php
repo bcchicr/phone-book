@@ -23,7 +23,7 @@ class Uri
     private string $query;
     private string $fragment;
 
-    public function __construct(string $uri)
+    public function __construct(string $uri = '')
     {
         $parts = parse_url($uri);
         if (false === $parts) {
