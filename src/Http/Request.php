@@ -3,11 +3,12 @@
 namespace Bcchicr\StudentList\Http;
 
 
-class Request
+class Request extends Message
 {
+
     private array $query = [];
     private array $cookies = [];
-    private ?array $body;
+    private ?array $parsedBody;
     private array $server;
 
     private string $method;
@@ -16,6 +17,7 @@ class Request
     public function __construct(
         string $method,
         string|Uri $uri,
+        array $headers = [],
         ?array $body = null,
         array $server = []
     ) {
@@ -25,7 +27,7 @@ class Request
         }
         $this->uri = $uri;
         $this->method = $method;
-        $this->body = $body;
+        $this->setHeaders($headers);
         parse_str($uri->getQuery(), $this->query);
     }
 
@@ -61,14 +63,14 @@ class Request
         $new->query = $query;
         return $new;
     }
-    public function getBody(): array
+    public function getParsedBody(): ?array
     {
-        return $this->body;
+        return $this->parsedBody;
     }
-    public function withBody(?array $body)
+    public function withParsedBody(?array $data): static
     {
         $new = clone $this;
-        $new->body = $body;
+        $new->parsedBody = $data;
         return $new;
     }
 }

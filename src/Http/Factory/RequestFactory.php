@@ -21,6 +21,7 @@ class RequestFactory
             $method,
             $uri,
             [],
+            null,
             $server
         );
     }
@@ -30,13 +31,16 @@ class RequestFactory
         if (!isset($server['REQUEST_METHOD'])) {
             $server['REQUEST_METHOD'] = 'GET';
         }
-        // $headers = $this->getHeadersFromServer($server);
-        $post = $this->isFormDataReceived($server)
+        $headers = $this->getHeadersFromServer($server);
+        $post =
+            $this->getMethodFromServer($server) === 'POST' &&
+            $this->isFormDataReceived($headers)
             ? $_POST
             : null;
 
         return $this->createRequestFromArrays(
             $server,
+            $headers,
             $_COOKIE,
             $_GET,
             $post
@@ -44,6 +48,7 @@ class RequestFactory
     }
     private function createRequestFromArrays(
         array $server,
+        array $headers,
         array $cookies = [],
         array $get = [],
         ?array $post = null
@@ -51,22 +56,24 @@ class RequestFactory
         $method = $this->getMethodFromServer($server);
         $uri = $this->getUriFromServer($server);
         $request = $this->createRequest($method, $uri, $server);
+        foreach ($headers as $headerName => $headerValue) {
+            $request = $request->withAddedHeader($headerName, $headerValue);
+        }
         $request = $request
             ->withCookieParams($cookies)
             ->withQuery($get)
-            ->withBody($post);
+            ->withParsedBody($post);
         return $request;
     }
-    private function isFormDataReceived(array $server): bool
+    private function isFormDataReceived(array $headers): bool
     {
         if (
-            !$this->getMethodFromServer($server) === 'POST' ||
-            !isset($server['CONTENT_TYPE'])
+            !isset($headers['content-type'])
         ) {
             return false;
         }
         return array_reduce(
-            explode(';', $server['CONTENT_TYPE']),
+            explode(';', $headers['content-type']),
             function ($carry, $type) {
                 $isFormType = in_array(
                     mb_strtolower(trim($type)),
@@ -126,24 +133,24 @@ class RequestFactory
 
         return $server['REQUEST_METHOD'];
     }
-    // private function getHeadersFromServer(array $server): array
-    // {
-    //     $headers = [];
-    //     foreach ($server as $key => $value) {
-    //         if (!$value) {
-    //             continue;
-    //         }
-    //         if (strpos($key, 'HTTP_') === 0) {
-    //             $name = strtr(mb_strtolower(mb_substr($key, 5)), '_', '-');
-    //             $headers[$name] = $value;
-    //             continue;
-    //         }
-    //         if (strpos($key, 'CONTENT_') === 0) {
-    //             $name = strtr(mb_strtolower($key), '_', '-');
-    //             $headers[$name] = $value;
-    //             continue;
-    //         }
-    //     }
-    //     return $headers;
-    // }
+    private function getHeadersFromServer(array $server): array
+    {
+        $headers = [];
+        foreach ($server as $key => $value) {
+            if (!$value) {
+                continue;
+            }
+            if (strpos($key, 'HTTP_') === 0) {
+                $name = strtr(mb_strtolower(mb_substr($key, 5)), '_', '-');
+                $headers[$name] = $value;
+                continue;
+            }
+            if (strpos($key, 'CONTENT_') === 0) {
+                $name = strtr(mb_strtolower($key), '_', '-');
+                $headers[$name] = $value;
+                continue;
+            }
+        }
+        return $headers;
+    }
 }
