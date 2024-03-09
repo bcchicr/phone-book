@@ -9,7 +9,7 @@ abstract class Message
     protected array $headers = [];
     protected array $originalHeaderNames = [];
     protected string $protocol = '1.1';
-    protected ?string $body = null;
+    protected ?Stream $body = null;
 
     public function getProtocolVersion(): string
     {
@@ -78,11 +78,11 @@ abstract class Message
         unset($new->originalHeaderNames[$lowerCasedName]);
         return $new;
     }
-    public function getBody(): ?string
+    public function getBody(): ?Stream
     {
         return $this->body;
     }
-    public function withBody(?string $body): static
+    public function withBody(?Stream $body): static
     {
         $new = clone $this;
         $new->body = $body;

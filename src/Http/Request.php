@@ -18,7 +18,7 @@ class Request extends Message
         string $method,
         string|Uri $uri,
         array $headers = [],
-        ?string $body = null,
+        $body = null,
         string $version = '1.1',
         array $server = []
     ) {
@@ -29,9 +29,11 @@ class Request extends Message
         $this->uri = $uri;
         $this->method = $method;
         $this->setHeaders($headers);
-        $this->body = $body;
         $this->protocol = $version;
         parse_str($uri->getQuery(), $this->query);
+        if (!empty($body)) {
+            $this->body = Stream::create($body);
+        }
     }
 
     public function getMethod(): string

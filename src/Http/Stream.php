@@ -32,18 +32,6 @@ class Stream
         ],
     ];
 
-    public function __construct(mixed $body)
-    {
-        if (!self::isStream($body)) {
-            throw new InvalidArgumentException("First argument to Stream::__construct() must be a stream resource");
-        }
-
-        $this->stream = $body;
-        $meta = stream_get_meta_data($this->stream);
-        $this->isSeekable = $meta['seekable'] && fseek($this->stream, 0, SEEK_CUR) === 0;
-        $this->isReadable = isset(self::READ_WRITE_HASH['read'][$meta['mode']]);
-        $this->isWritable = isset(self::READ_WRITE_HASH['write'][$meta['mode']]);
-    }
     public static function create($body = ''): Stream
     {
         if ($body instanceof Stream) {
@@ -60,9 +48,29 @@ class Stream
         }
         return new self($body);
     }
+
+    public function __construct(mixed $body)
+    {
+        if (!self::isStream($body)) {
+            throw new InvalidArgumentException("First argument to Stream::__construct() must be a stream resource");
+        }
+
+        $this->stream = $body;
+        $meta = stream_get_meta_data($this->stream);
+        $this->isSeekable = $meta['seekable'] && fseek($this->stream, 0, SEEK_CUR) === 0;
+        $this->isReadable = isset(self::READ_WRITE_HASH['read'][$meta['mode']]);
+        $this->isWritable = isset(self::READ_WRITE_HASH['write'][$meta['mode']]);
+    }
     public function __destruct()
     {
         $this->close();
+    }
+    public function __toString(): string
+    {
+        if ($this->isSeekable) {
+            $this->rewind();
+        }
+        return $this->getContents();
     }
     public function close(): void
     {
