@@ -2,9 +2,9 @@
 
 namespace Bcchicr\StudentList\Http\Factory;
 
+use InvalidArgumentException;
 use Bcchicr\StudentList\Http\Uri;
 use Bcchicr\StudentList\Http\Request;
-use Bcchicr\StudentList\Http\Exception\InvalidArgumentException;
 
 class RequestFactory
 {
@@ -22,6 +22,7 @@ class RequestFactory
             $uri,
             [],
             null,
+            '1.1',
             $server
         );
     }
@@ -55,11 +56,17 @@ class RequestFactory
     ): Request {
         $method = $this->getMethodFromServer($server);
         $uri = $this->getUriFromServer($server);
+        $protocol =
+            isset($server['SERVER_PROTOCOL'])
+            ? str_replace('HTTP/', '', $server['SERVER_PROTOCOL'])
+            : '1.1';
+
         $request = $this->createRequest($method, $uri, $server);
         foreach ($headers as $headerName => $headerValue) {
             $request = $request->withAddedHeader($headerName, $headerValue);
         }
         $request = $request
+            ->withProtocolVersion($protocol)
             ->withCookieParams($cookies)
             ->withQuery($get)
             ->withParsedBody($post);

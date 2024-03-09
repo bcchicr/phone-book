@@ -2,14 +2,29 @@
 
 namespace Bcchicr\StudentList\Http;
 
-use Bcchicr\StudentList\Http\Exception\InvalidArgumentException;
+use InvalidArgumentException;
 
 abstract class Message
 {
     protected array $headers = [];
     protected array $originalHeaderNames = [];
+    protected string $protocol = '1.1';
     protected ?string $body = null;
 
+    public function getProtocolVersion(): string
+    {
+        return $this->protocol;
+    }
+    public function withProtocolVersion(string $version)
+    {
+        if ($this->protocol === $version) {
+            return $this;
+        }
+
+        $new = clone $this;
+        $new->protocol = $version;
+        return $new;
+    }
     public function getHeaders(): array
     {
         return $this->headers;

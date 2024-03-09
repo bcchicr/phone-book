@@ -18,7 +18,8 @@ class Request extends Message
         string $method,
         string|Uri $uri,
         array $headers = [],
-        ?array $body = null,
+        ?string $body = null,
+        string $version = '1.1',
         array $server = []
     ) {
         $this->server = $server;
@@ -28,6 +29,8 @@ class Request extends Message
         $this->uri = $uri;
         $this->method = $method;
         $this->setHeaders($headers);
+        $this->body = $body;
+        $this->protocol = $version;
         parse_str($uri->getQuery(), $this->query);
     }
 

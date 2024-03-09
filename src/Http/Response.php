@@ -2,7 +2,8 @@
 
 namespace Bcchicr\StudentList\Http;
 
-use Bcchicr\StudentList\Http\Exception\InvalidArgumentException;
+use InvalidArgumentException;
+
 
 class Response extends Message
 {
@@ -20,12 +21,14 @@ class Response extends Message
     public function __construct(
         int $status = 200,
         array $headers = [],
-        $body = null,
+        ?string $body = null,
+        string $version = '1.1',
         string $reason = ''
     ) {
         $this->statusCode = $status;
         $this->body = $body;
         $this->setHeaders($headers);
+        $this->protocol = $version;
         $this->reasonPhrase =
             ($reason === '' && isset(self::PHRASES[$status]))
             ? self::PHRASES[$status]
