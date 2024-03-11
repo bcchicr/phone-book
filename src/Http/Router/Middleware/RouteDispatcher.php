@@ -23,7 +23,7 @@ class RouteDispatcher implements Middleware
     {
         $routeClass = Route::class;
         if (!$result = $request->getAttribute($routeClass)) {
-            return $this->responseFactory->createResponse(404)->withBody(Stream::create('Not Found'));
+            return $this->responseFactory->createResponse(404);
         }
         if (!$result instanceof Route) {
             $resultType = get_debug_type($result);
