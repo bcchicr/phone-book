@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcchicr\StudentList\Http;
+namespace Bcchicr\StudentList\Http\Foundation;
 
 use RuntimeException;
 use InvalidArgumentException;

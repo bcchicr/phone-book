@@ -1,10 +1,10 @@
 <?php
 
-namespace Bcchicr\StudentList\Http\Factory;
+namespace Bcchicr\StudentList\Http\Foundation\Factory;
 
 use InvalidArgumentException;
-use Bcchicr\StudentList\Http\Uri;
-use Bcchicr\StudentList\Http\Request;
+use Bcchicr\StudentList\Http\Foundation\Uri;
+use Bcchicr\StudentList\Http\Foundation\Request;
 
 class RequestFactory
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Bcchicr\StudentList\Controller;
+namespace Bcchicr\StudentList\Http\Controllers;
 
-use Bcchicr\StudentList\Http\Request;
-use Bcchicr\StudentList\Http\Response;
+use Bcchicr\StudentList\Http\Foundation\Request;
+use Bcchicr\StudentList\Http\Foundation\Response;
 
 class StartPageController
 {

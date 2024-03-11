@@ -1,22 +1,35 @@
 <?php
 
-use Bcchicr\StudentList\App\Application;
-use Bcchicr\StudentList\Http\Factory\RequestFactory;
-use Bcchicr\StudentList\Controller\StartPageController;
-use Bcchicr\StudentList\Http\Response;
+use Bcchicr\StudentList\Http\Controllers\StartPageController;
+use Bcchicr\StudentList\Http\Foundation\Factory\RequestFactory;
+use Bcchicr\StudentList\Http\Handler\Runner\Pipeline;
+use Bcchicr\StudentList\Http\Handler\Runner\RequestRunner;
+use Bcchicr\StudentList\Http\Router\Middleware\RouteDispatcher;
+use Bcchicr\StudentList\Http\Router\Middleware\RouteMatcher;
+use Bcchicr\StudentList\Http\Router\Router;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-
-$app = new Application();
+$app = require_once __DIR__ . '/../bootstrap/app.php';
 $request = $app(RequestFactory::class)->createRequestFromGlobals();
 
-$uri = $request->getUri()->getPath();
-if ($uri === '/') {
-    $response = (new StartPageController)->index($request);
-} else {
-    $response = new Response(404, [], 'Not Found');
-}
+/**
+ * @var Router
+ */
+$router = $app(Router::class);
+$router->get('/', [StartPageController::class, 'index']);
+
+$pipeline = new Pipeline();
+$pipeline->pipe($app(RouteMatcher::class));
+$pipeline->pipe($app(RouteDispatcher::class));
+
+$runner = new RequestRunner($pipeline);
+$response = $runner->handle($request);
+
+
+//  new Router();
+
+// $handler = 
 
 if (headers_sent()) {
     throw new RuntimeException('Headers were already sent. The response could not be emitted');
@@ -38,4 +51,3 @@ foreach ($response->getHeaders() as $name => $value) {
 }
 echo $response->getBody();
 exit();
-// xdebug_info();

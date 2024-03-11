@@ -1,11 +1,10 @@
 <?php
 
-namespace Bcchicr\StudentList\Http;
-
+namespace Bcchicr\StudentList\Http\Foundation;
 
 class Request extends Message
 {
-
+    private array $attributes = [];
     private array $query = [];
     private array $cookies = [];
     private ?array $parsedBody;
@@ -62,20 +61,47 @@ class Request extends Message
     {
         return $this->query;
     }
-    public function withQuery(array $query)
+    public function withQuery(array $query): static
     {
         $new = clone $this;
         $new->query = $query;
         return $new;
     }
-    public function getParsedBody(): ?array
+    public function getParsedBody(): null|array|object
     {
         return $this->parsedBody;
     }
-    public function withParsedBody(?array $data): static
+    public function withParsedBody(null|array|object $data): static
     {
         $new = clone $this;
         $new->parsedBody = $data;
+        return $new;
+    }
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
+    public function getAttribute(string $name, mixed $default = null)
+    {
+        return
+            isset($this->attributes[$name])
+            ? $this->attributes[$name]
+            : $default;
+    }
+    public function withAttribute(string $name, mixed $value): static
+    {
+        $new = clone $this;
+        $new->attributes[$name] = $value;
+        return $new;
+    }
+    public function withoutAttribute(string $name): static
+    {
+        if (!isset($this->attributes[$name])) {
+            return $this;
+        }
+
+        $new = clone $this;
+        unset($new->attributes[$name]);
         return $new;
     }
 }

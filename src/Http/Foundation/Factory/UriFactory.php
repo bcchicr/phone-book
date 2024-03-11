@@ -1,8 +1,8 @@
 <?php
 
-namespace Bcchicr\StudentList\Http\Factory;
+namespace Bcchicr\StudentList\Http\Foundation\Factory;
 
-use Bcchicr\StudentList\Http\Uri;
+use Bcchicr\StudentList\Http\Foundation\Uri;
 
 class UriFactory
 {
