@@ -6,7 +6,6 @@ use Bcchicr\StudentList\Http\Foundation\Factory\ResponseFactory;
 use Bcchicr\StudentList\Http\Foundation\Request;
 use Bcchicr\StudentList\Http\Handler\RequestHandler;
 use Bcchicr\StudentList\Http\Foundation\Response;
-use Bcchicr\StudentList\Http\Foundation\Stream;
 use Bcchicr\StudentList\Http\Middleware\Middleware;
 use Bcchicr\StudentList\Http\Router\Route;
 use Bcchicr\StudentList\Http\Router\Router;
@@ -21,7 +20,7 @@ class RouteMatcher implements Middleware
     public function process(Request $request, RequestHandler $handler): Response
     {
         if (!$route = $this->router->match($request)) {
-            return $this->responseFactory->createResponse(404)->withBody(Stream::create('Not Found'));
+            return $handler->handle($request);
         }
         if (!$route->isAllowedMethod($request->getMethod())) {
             $method = $route->getMethod();
