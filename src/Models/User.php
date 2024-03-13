@@ -4,17 +4,15 @@ namespace Bcchicr\StudentList\Models;
 
 class User extends Model
 {
-    private StudentData $studentData;
-
     public function __construct(
         int $id,
         private string $login,
         private string $email,
-        private string $password
+        private string $password,
+        private StudentData $studentData,
     ) {
         parent::__construct($id);
     }
-
     public function getLogin(): string
     {
         return $this->login;

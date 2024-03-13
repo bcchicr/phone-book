@@ -6,12 +6,17 @@ use DateTime;
 
 class StudentData extends Model
 {
-    private string $firstName;
-    private string $lastName;
-    private string $sex;
-    private string $group;
-    private DateTime $birthDate;
-    private int $examPoints;
+    public function __construct(
+        int $id,
+        private string $firstName,
+        private string $lastName,
+        private string $sex,
+        private DateTime $birthDate,
+        private string $group,
+        private int $examPoints,
+    ) {
+        parent::__construct($id);
+    }
 
     public function getFirstName(): string
     {

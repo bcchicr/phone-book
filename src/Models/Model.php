@@ -2,13 +2,16 @@
 
 namespace Bcchicr\StudentList\Models;
 
+use SplObserver;
+use SplSubject;
+
 abstract class Model
 {
     public function __construct(
-        private int $id
+        private ?int $id = null,
     ) {
     }
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
