@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Factory;
+namespace Bcchicr\StudentList\Models\Factory\Selection;
 
 use InvalidArgumentException;
 use Bcchicr\StudentList\Models\Identity\IdentityObject;

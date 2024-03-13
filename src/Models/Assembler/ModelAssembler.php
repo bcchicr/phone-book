@@ -5,12 +5,9 @@ namespace Bcchicr\StudentList\Models\Assembler;
 use PDO;
 use PDOStatement;
 use Bcchicr\StudentList\Models\Model;
-use Bcchicr\StudentList\Models\Factory\ModelFactory;
 use Bcchicr\StudentList\Models\Collection\Collection;
-use Bcchicr\StudentList\Models\Factory\UpsertFactory;
 use Bcchicr\StudentList\Models\Identity\IdentityObject;
-use Bcchicr\StudentList\Models\Factory\SelectionFactory;
-use Bcchicr\StudentList\Models\Collection\Factory\CollectionFactory;
+use Bcchicr\StudentList\Models\Factory\Persistance\PersistanceFactory;
 
 abstract class ModelAssembler
 {
@@ -19,10 +16,7 @@ abstract class ModelAssembler
 
     public function __construct(
         private PDO $pdo,
-        private ModelFactory $modelFactory,
-        private SelectionFactory $selectionFactory,
-        private UpsertFactory $upsertFactory,
-        private CollectionFactory $collectionFactory,
+        private PersistanceFactory $factory
     ) {
     }
     public function getStatement(string $str): PDOStatement
@@ -42,15 +36,15 @@ abstract class ModelAssembler
         if (!is_null($this->collection)) {
             return $this->collection;
         }
-        [$selection, $values] = $this->selectionFactory->newSelection($idObj);
+        [$selection, $values] = $this->factory->getSelectionFactory()->newSelection($idObj);
         $stmt = $this->getStatement($selection);
         $stmt->execute($values);
         $raw = $stmt->fetchAll();
-        return $this->collectionFactory->getCollection($raw);
+        return $this->factory->getCollectionFactory()->getCollection($raw);
     }
     public function upsert(Model $obj): void
     {
-        [$update, $values] = $this->upsertFactory->newUpdate($obj);
+        [$update, $values] = $this->factory->getUpsertFactory()->newUpdate($obj);
         $stmt = $this->getStatement($update);
         $stmt->execute($values);
         if (is_null($obj->getId())) {

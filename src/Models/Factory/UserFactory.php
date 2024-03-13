@@ -22,7 +22,8 @@ class UserFactory extends ModelFactory
             return $object;
         }
 
-        $studentIdentity = $this->studentDataIdentityFactory->getIdentityObject()
+        $studentIdentity =
+            $this->studentDataIdentityFactory->getIdentityObject()
             ->field('student_id')
             ->eq($raw['user_id']);
         $studentData = $this->studentDataAssembler->findOne($studentIdentity);

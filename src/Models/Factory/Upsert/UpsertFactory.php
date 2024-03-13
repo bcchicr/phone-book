@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Factory;
+namespace Bcchicr\StudentList\Models\Factory\Upsert;
 
 use Bcchicr\StudentList\Models\Model;
 
