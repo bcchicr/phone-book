@@ -18,7 +18,10 @@ abstract class SelectionFactory
             $compStrings[] = "{$comp['name']} {$comp['operator']} ?";
             $values[] = $comp['value'];
         }
-        $where = "WHERE " . implode(" AND ", $compStrings);
+        $where = implode(" AND ", $compStrings);
+        if ($where !== '') {
+            $where = "WHERE " . $where;
+        }
         return [$where, $values];
     }
 }

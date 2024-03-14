@@ -5,7 +5,7 @@ namespace Bcchicr\StudentList\Models;
 class User extends Model
 {
     public function __construct(
-        int $id,
+        ?int $id,
         private string $login,
         private string $email,
         private string $password,

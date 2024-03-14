@@ -4,6 +4,7 @@ namespace Bcchicr\StudentList\Models\Factory\Upsert;
 
 use Bcchicr\StudentList\Models\Model;
 use Bcchicr\StudentList\Models\StudentData;
+use DateTimeInterface;
 use InvalidArgumentException;
 
 class StudentDataUpsert extends UpsertFactory
@@ -18,7 +19,7 @@ class StudentDataUpsert extends UpsertFactory
         $values['student_first_name'] = $obj->getFirstName();
         $values['student_last_name'] = $obj->getLastName();
         $values['student_sex'] = $obj->getSex();
-        $values['student_birth_date'] = $obj->getBirthDate();
+        $values['student_birth_date'] = $obj->getBirthDate()->format(DateTimeInterface::RFC3339);
         $values['student_group'] = $obj->getGroup();
         $values['student_exam_points'] = $obj->getExamPoints();
 

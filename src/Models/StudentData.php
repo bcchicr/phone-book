@@ -7,7 +7,7 @@ use DateTime;
 class StudentData extends Model
 {
     public function __construct(
-        int $id,
+        ?int $id,
         private string $firstName,
         private string $lastName,
         private string $sex,
@@ -41,5 +41,9 @@ class StudentData extends Model
     public function getExamPoints(): int
     {
         return $this->examPoints;
+    }
+    public function setExamPoints(int $points): void
+    {
+        $this->examPoints = $points;
     }
 }

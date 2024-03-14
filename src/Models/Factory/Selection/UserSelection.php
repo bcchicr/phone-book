@@ -14,7 +14,7 @@ class UserSelection extends SelectionFactory
             throw new InvalidArgumentException(sprintf("Expected %s as argument. %s was given", UserIdentity::class, get_debug_type($obj)));
         }
         $fields = implode(',', $obj->getObjectFields());
-        $core = "SELECT {$fields} FROM student_data";
+        $core = "SELECT {$fields} FROM users";
         [$where, $values] = $this->buildWhere($obj);
         return [$core . " " . $where, $values];
     }

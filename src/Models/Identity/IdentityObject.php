@@ -44,14 +44,14 @@ abstract class IdentityObject
     {
         return empty($this->fields);
     }
-    public function enforceField(string $fieldName): void
+    private function enforceField(string $fieldName): void
     {
         if (
             !in_array($fieldName, $this->enforce) &&
             !empty($this->enforce)
         ) {
             $forceList = implode(', ', $this->enforce);
-            throw new InvalidArgumentException("Expected one of ({$forceList} as field name. {$fieldName} was given)");
+            throw new InvalidArgumentException("Expected one of ({$forceList} as field name. '{$fieldName}' was given)");
         }
     }
     public function eq(mixed $value): static

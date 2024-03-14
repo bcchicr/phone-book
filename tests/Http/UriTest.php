@@ -3,6 +3,7 @@
 namespace Bcchicr\StudentList\Http;
 
 use PHPUnit\Framework\TestCase;
+use Bcchicr\StudentList\Http\Foundation\Uri;
 
 class UriTest extends TestCase
 {
