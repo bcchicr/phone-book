@@ -2,6 +2,7 @@
 
 namespace Bcchicr\StudentList\Http\Handler;
 
+use Bcchicr\StudentList\Http\Foundation\RedirectResponse;
 use RuntimeException;
 use Bcchicr\StudentList\Http\Foundation\Response;
 
