@@ -15,6 +15,10 @@ class UserController
             View::get('login.php', ['test' => 'hello2'])
         );
     }
+    public function auth(Request $request): Response
+    {
+        return new RedirectResponse('/');
+    }
     public function create(Request $request): Response
     {
         return (new Response())->withBody(
@@ -22,10 +26,6 @@ class UserController
         );
     }
     public function store(Request $request): Response
-    {
-        return new RedirectResponse('/');
-    }
-    public function auth(Request $request): Response
     {
         return new RedirectResponse('/');
     }
