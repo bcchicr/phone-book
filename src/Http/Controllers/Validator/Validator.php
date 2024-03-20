@@ -27,6 +27,12 @@ class Validator
             $this->addError($fieldName, "{$fieldName} не может быть пустым.");
         }
     }
+    private function minLen(string $fieldName, string $field, int $len)
+    {
+        if (mb_strlen($field) < $len) {
+            $this->addError($fieldName, "{$fieldName} должен быть длиннее {$len} символов.");
+        }
+    }
     private function maxLen(string $fieldName, string $field, int $len)
     {
         if (mb_strlen($field) > $len) {
@@ -35,7 +41,7 @@ class Validator
     }
     private function regex(string $fieldName, string $field, string $regex)
     {
-        if (preg_match($regex, $field) === false) {
+        if (!preg_match($regex, $field)) {
             $this->addError($fieldName, "{$fieldName} имеет некорректный формат.");
         }
     }

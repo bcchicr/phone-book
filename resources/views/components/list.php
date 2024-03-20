@@ -35,14 +35,6 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <nav class="table-nav">
-                <p>Страницы: </p>
-                <ul>
-                    <?php for ($i = 1; $i < count($students); $i++) : ?>
-                        <li><?= $i ?></li>
-                    <?php endfor; ?>
-                </ul>
-            </nav>
         <?php else : ?>
             <p>Пока не зарегистрировано ни одного студента.</p>
         <?php endif; ?>

@@ -54,47 +54,48 @@ class UserController
     }
     public function store(Request $request): Response
     {
-        $login = $this->validator->validate(
+        $values = [];
+        $values['login'] = $this->validator->validate(
             $request->getParsedBody(),
             'login',
             "required|max-len:100|unique"
         );
-        $email = $this->validator->validate(
+        $values['email'] = $this->validator->validate(
             $request->getParsedBody(),
             'email',
             "required|max-len:255|regex:/^[\w\-\.]+@([\w\-]+\.)+[\w\-]{2,4}$/u|unique"
         );
-        $password = $this->validator->validate(
+        $values['password'] = $this->validator->validate(
             $request->getParsedBody(),
             'password',
-            "required|max-len:255|unique"
+            "required|min-len:8|max-len:255|unique"
         );
-        $firstName = $this->validator->validate(
+        $values['first-name'] = $this->validator->validate(
             $request->getParsedBody(),
             'first-name',
             "required|max-len:100|regex:/^[А-ЯЁ][A-ЯЁa-яё' -]*$/u"
         );
-        $lastName = $this->validator->validate(
+        $values['last-name'] = $this->validator->validate(
             $request->getParsedBody(),
             'last-name',
             "required|max-len:100|regex:/^[А-ЯЁ][A-ЯЁa-яё' -]*$/u"
         );
-        $sex = $this->validator->validate(
+        $values['sex'] = $this->validator->validate(
             $request->getParsedBody(),
             'sex',
             "required|regex:/^[fm]$/u"
         );
-        $birthDate = $this->validator->validate(
+        $values['birth-date'] = $this->validator->validate(
             $request->getParsedBody(),
             'birth-date',
             "required|date"
         );
-        $points = $this->validator->validate(
+        $values['points'] = $this->validator->validate(
             $request->getParsedBody(),
             'points',
             "required|int|min:0|max:300"
         );
-        $group = $this->validator->validate(
+        $values['group'] = $this->validator->validate(
             $request->getParsedBody(),
             'group',
             "required|regex:/^[А-яЁа-яё0-9]{2,5}$/u"
@@ -103,11 +104,28 @@ class UserController
         $errors = $this->validator->getErrors();
         if (count($errors) > 0) {
             return $this->responseFactory->createResponse(400)
-                ->withBody(View::get('register.php', ['errors' => $errors]));
+                ->withBody(View::get('register.php', [
+                    'errors' => $errors,
+                    'values' => $values
+                ]));
         }
 
-        $studentData = new StudentData(null, $firstName, $lastName, $sex, $birthDate, $group, $points);
-        $user = new User(null, $login, $email, $password, $studentData);
+        $studentData = new StudentData(
+            null,
+            $values['first-name'],
+            $values['last-name'],
+            $values['sex'],
+            $values['birth-date'],
+            $values['group'],
+            $values['points']
+        );
+        $user = new User(
+            null,
+            $values['login'],
+            $values['email'],
+            $values['password'],
+            $studentData
+        );
         $this->assembler->upsert($user);
         return $this->responseFactory->createRedirectResponse('/');
     }
