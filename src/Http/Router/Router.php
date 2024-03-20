@@ -2,6 +2,7 @@
 
 namespace Bcchicr\StudentList\Http\Router;
 
+use Bcchicr\StudentList\App\Application;
 use Bcchicr\StudentList\Http\Foundation\Request;
 use InvalidArgumentException;
 use ReflectionClass;
@@ -12,7 +13,8 @@ class Router
     private const METHOD_POST = 'POST';
 
     public function __construct(
-        private RouteCollection $routes
+        private RouteCollection $routes,
+        private Application $app
     ) {
     }
     public function getRoutes(): RouteCollection
@@ -40,7 +42,7 @@ class Router
         if (!is_callable($handler)) {
             self::checkHandlerArray($handler);
             [$controllerName, $functionName] = $handler;
-            $handler = [new $controllerName(), $functionName];
+            $handler = [$this->app->get($controllerName), $functionName];
         }
         $route = new Route($method, $path, $handler);
         $this->routes->setRoute($route);

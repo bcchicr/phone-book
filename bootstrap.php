@@ -2,7 +2,6 @@
 
 use Bcchicr\StudentList\App\Application;
 use Bcchicr\StudentList\Http\Router\Router;
-use Bcchicr\StudentList\Http\Controllers\StartPageController;
 use Bcchicr\StudentList\Http\Controllers\UserController;
 
 $app = new Application(__DIR__);
@@ -12,7 +11,7 @@ $app = new Application(__DIR__);
  * @var Router
  */
 $router = $app->get(Router::class);
-$router->get('/', [StartPageController::class, 'index']);
+$router->get('/', [UserController::class, 'index']);
 
 $router->get('/register', [UserController::class, 'create']);
 $router->post('/register', [UserController::class, 'store']);

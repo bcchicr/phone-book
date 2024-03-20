@@ -6,16 +6,22 @@ use DateTime;
 
 class StudentData extends Model
 {
+    private DateTime|string $birthDate;
+
     public function __construct(
         ?int $id,
         private string $firstName,
         private string $lastName,
         private string $sex,
-        private DateTime $birthDate,
+        $birthDate,
         private string $group,
         private int $examPoints,
     ) {
         parent::__construct($id);
+        if (is_string($birthDate)) {
+            $birthDate = new DateTime($birthDate);
+        }
+        $this->birthDate = $birthDate;
     }
 
     public function getFirstName(): string

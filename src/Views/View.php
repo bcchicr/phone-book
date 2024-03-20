@@ -8,7 +8,7 @@ class View
 {
     private const TEMPLATES_PATH = __DIR__ . '/../../resources/views/';
 
-    public static function get(string $name, array $vars): Stream
+    public static function get(string $name, array $vars = []): Stream
     {
         extract($vars);
 

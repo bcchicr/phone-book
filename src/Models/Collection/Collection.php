@@ -5,7 +5,6 @@ namespace Bcchicr\StudentList\Models\Collection;
 use InvalidArgumentException;
 use Bcchicr\StudentList\Models\Factory\ModelFactory;
 use Bcchicr\StudentList\Models\Model;
-use Bcchicr\StudentList\Models\ModelValidationTrait;
 use Countable;
 use Generator;
 use IteratorAggregate;

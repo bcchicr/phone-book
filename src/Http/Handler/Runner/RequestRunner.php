@@ -2,11 +2,8 @@
 
 namespace Bcchicr\StudentList\Http\Handler\Runner;
 
-use RuntimeException;
-use InvalidArgumentException;
 use Bcchicr\StudentList\Http\Foundation\Request;
 use Bcchicr\StudentList\Http\Foundation\Response;
-use Bcchicr\StudentList\Http\Middleware\Middleware;
 use Bcchicr\StudentList\Http\Handler\RequestHandler;
 
 class RequestRunner implements RequestHandler
