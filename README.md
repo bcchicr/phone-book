@@ -20,13 +20,13 @@
 Клонировать репозиторий на локальную машину:
 
 ```bash
-  git clone https://github.com/bcchicr/student-list.git
+git clone https://github.com/bcchicr/student-list.git
 ```
 
 Зайти в папку проекта и установить зависимости:
 
 ```bash
-  composer install
+composer install
 ```
 
 Настроить конфиг `./config/config.ini`
@@ -34,7 +34,7 @@
 Запустить php-скрипт, создающий таблицы базы данных:
 
 ```bash
-  php ./database/dump.php
+php ./database/dump.php
 ```
 
 ## Особенности
