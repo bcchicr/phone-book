@@ -18,7 +18,7 @@
                 <form class="card" action="/register" method="post">
                     <h2 class="form-header">Регистрация</h2>
                     <fieldset>
-                        <input class="field" name="login" type="text" placeholder="Логин" value="<?= $values['login'] ?>" required>
+                        <input class="field" name="login" type="text" placeholder="Логин" value="<?= htmlspecialchars($values['login'] ?? '') ?>" data-required>
                         <div class="hint-container">
                             <?php if (isset($errors['login'])) : ?>
                                 <?php foreach ($errors['login'] as $error) : ?>
@@ -26,7 +26,7 @@
                                 <?php endforeach; ?>
                             <?php endif; ?>
                         </div>
-                        <input class="field" name="email" type="email" placeholder="E-mail" value="<?= $values['email'] ?>" required>
+                        <input class="field" name="email" type="email" placeholder="E-mail" value="<?= htmlspecialchars($values['email'] ?? '') ?>" data-required>
                         <div class=" hint-container">
                             <?php if (isset($errors['email'])) : ?>
                                 <?php foreach ($errors['email'] as $error) : ?>
@@ -34,7 +34,7 @@
                                 <?php endforeach; ?>
                             <?php endif; ?>
                         </div>
-                        <input class="field" name=" password" type="password" placeholder=" Пароль" value="<?= $values['password'] ?>" required>
+                        <input class="field" name=" password" type="password" placeholder=" Пароль" value="<?= htmlspecialchars($values['password'] ?? '') ?>" data-required>
                         <div class="hint-container">
                             <?php if (isset($errors['password'])) : ?>
                                 <?php foreach ($errors['password'] as $error) : ?>
@@ -45,7 +45,7 @@
                     </fieldset>
                     <div class="form-divider"></div>
                     <fieldset>
-                        <input class="field" name="first-name" type="text" placeholder="Имя" value="<?= $values['first-name'] ?>" required>
+                        <input class="field" name="first-name" type="text" placeholder="Имя" value="<?= htmlspecialchars($values['first-name'] ?? '') ?>" data-required>
                         <div class="hint-container">
                             <?php if (isset($errors['first-name'])) : ?>
                                 <small class="hint">Буквы русского алфавита, дефис, апостроф или пробел.</small>
@@ -54,7 +54,7 @@
                                 <?php endforeach; ?>
                             <?php endif; ?>
                         </div>
-                        <input class="field" name="last-name" type="text" placeholder="Фамилия" value="<?= $values['last-name'] ?>" required>
+                        <input class="field" name="last-name" type="text" placeholder="Фамилия" value="<?= htmlspecialchars($values['last-name'] ?? '') ?>" data-required>
                         <div class="hint-container">
                             <?php if (isset($errors['last-name'])) : ?>
                                 <small class="hint">Буквы русского алфавита, дефис, апостроф или пробел.</small>
@@ -64,7 +64,7 @@
                             <?php endif; ?>
                         </div>
                         <label class="field-label" for="sex">Пол:</label>
-                        <select class="field" id="sex" name="sex" value="<?= $values['sex'] ?>" required>
+                        <select class="field" id="sex" name="sex" value="<?= htmlspecialchars($values['sex'] ?? '') ?>" data-required>
                             <option value="m">Мужской</option>
                             <option value="f">Женский</option>
                         </select>
@@ -76,7 +76,7 @@
                             <?php endif; ?>
                         </div>
                         <label class="field-label" for="birth-date">Дата рождения:</label>
-                        <input class="field" id="birth-date" type="date" name="birth-date" value="<?= $values['birth-date'] ?>" required>
+                        <input class="field" id="birth-date" type="date" name="birth-date" value="<?= htmlspecialchars($values['birth-date'] ?? '') ?>" data-required>
                         <div class="hint-container">
                             <?php if (isset($errors['birth-date'])) : ?>
                                 <?php foreach ($errors['birth-date'] as $error) : ?>
@@ -84,7 +84,7 @@
                                 <?php endforeach; ?>
                             <?php endif; ?>
                         </div>
-                        <input class="field" name="points" type="number" placeholder="Баллы ЕГЭ" value="<?= $values['points'] ?>" required>
+                        <input class="field" name="points" type="number" placeholder="Баллы ЕГЭ" value="<?= htmlspecialchars($values['points'] ?? '') ?>" data-required>
                         <div class="hint-container">
                             <?php if (isset($errors['points'])) : ?>
                                 <?php foreach ($errors['points'] as $error) : ?>
@@ -92,7 +92,7 @@
                                 <?php endforeach; ?>
                             <?php endif; ?>
                         </div>
-                        <input class="field" name="group" type="text" placeholder="Группа" value="<?= $values['group'] ?>" required>
+                        <input class="field" name="group" type="text" placeholder="Группа" value="<?= htmlspecialchars($values['group'] ?? '') ?>" data-required>
                         <div class="hint-container">
                             <?php if (isset($errors['group'])) : ?>
                                 <small class="hint">От 2 до 5 русских букв или цифр.</small>
