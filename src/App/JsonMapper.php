@@ -4,10 +4,10 @@ namespace Bcchicr\Framework\App;
 
 class JsonMapper
 {
-    private mixed $value;
+    private array $value = [];
 
     public function __construct(
-        public string $path
+        private string $path
     ) {
         $jsonString = file_get_contents($path);
         $this->value = json_decode($jsonString);
@@ -18,7 +18,19 @@ class JsonMapper
     }
     public function deleteRecord(int $id)
     {
-        $this->value = array_slice($this->value, $id, 1);
-        json_encode($this->value);
+        array_splice($this->value, $id, 1);
+        $this->processChanges();
+    }
+    public function addRecord(object $record)
+    {
+        $this->value[] = $record;
+        $this->processChanges();
+    }
+    private function processChanges(): void
+    {
+        file_put_contents(
+            $this->path,
+            json_encode($this->value)
+        );
     }
 }

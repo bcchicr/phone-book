@@ -30,7 +30,8 @@ final class RecordController
     }
     public function delete(Request $request)
     {
-        // $this->
+        $id = $request->getQuery()['id'];
+        $this->jsonMapper->deleteRecord($id);
         return $this->responseFactory->createRedirectResponse('/');
     }
 }
