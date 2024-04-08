@@ -7,9 +7,9 @@ use Bcchicr\Framework\Http\Foundation\Response;
 
 class ResponseFactory
 {
-    public function createResponse(int $status = 200, string $reasonPhrase = ''): Response
+    public function createResponse(string $body = null, int $status = 200, string $reasonPhrase = ''): Response
     {
-        return new Response(status: $status, reason: $reasonPhrase);
+        return new Response(body: $body, status: $status, reason: $reasonPhrase);
     }
     public function createRedirectResponse(string $url): RedirectResponse
     {

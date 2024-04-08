@@ -2,9 +2,6 @@
 
 namespace Bcchicr\Framework\App;
 
-use PDO;
-use PDOException;
-use RuntimeException;
 use Bcchicr\Container\Container;
 use Bcchicr\Framework\App\Conf;
 
@@ -15,7 +12,7 @@ class Application extends Container
     ) {
         parent::__construct();
         $this->readConf();
-        $this->establishDBConnection();
+        $this->registerJsonMapper();
     }
     private function readConf(): void
     {
@@ -25,31 +22,16 @@ class Application extends Container
             new Conf($confPath)
         );
     }
-    private function establishDBConnection(): void
+    private function registerJsonMapper(): void
     {
         /**
          * @var Conf
          */
-        $dbConfig = $this->get(Conf::class);
-        $dsn = sprintf(
-            '%s:host=%s;dbname=%s',
-            $dbConfig->get('db.connection'),
-            $dbConfig->get('db.host'),
-            $dbConfig->get('db.database')
+        $conf = $this->get(Conf::class);
+        $path = $this->basePath . $conf->get('json.path');
+        $this->instance(
+            JsonMapper::class,
+            new JsonMapper($path)
         );
-        try {
-            $pdo = new PDO(
-                $dsn,
-                $dbConfig->get('db.user'),
-                $dbConfig->get('db.password')
-            );
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->instance(
-                PDO::class,
-                $pdo
-            );
-        } catch (PDOException $e) {
-            throw new RuntimeException("Unable to establish a connection with database: " . $e->getMessage());
-        }
     }
 }

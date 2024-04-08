@@ -1,8 +1,8 @@
 <?php
 
-use Bcchicr\StudentList\App\Application;
-use Bcchicr\StudentList\Http\Router\Router;
-use Bcchicr\StudentList\Http\Controllers\UserController;
+use Bcchicr\Framework\App\Application;
+use Bcchicr\Framework\Http\Router\Router;
+use Bcchicr\Framework\Http\Controllers\RecordController;
 
 $app = new Application(__DIR__);
 
@@ -11,13 +11,14 @@ $app = new Application(__DIR__);
  * @var Router
  */
 $router = $app->get(Router::class);
-$router->get('/', [UserController::class, 'index']);
+$router->get('/', [RecordController::class, 'index']);
+$router->post('/records/delete', [RecordController::class, 'delete']);
 
-$router->get('/register', [UserController::class, 'create']);
-$router->post('/register', [UserController::class, 'store']);
+// $router->get('/register', [UserController::class, 'create']);
+// $router->post('/register', [UserController::class, 'store']);
 
-$router->get('/login', [UserController::class, 'login']);
-$router->post('/login', [UserController::class, 'auth']);
+// $router->get('/login', [UserController::class, 'login']);
+// $router->post('/login', [UserController::class, 'auth']);
 
 
 
