@@ -10,7 +10,7 @@ class JsonMapper
         private string $path
     ) {
         $jsonString = file_get_contents($path);
-        $this->value = json_decode($jsonString);
+        $this->value = json_decode($jsonString) ?? [];
     }
     public function getValue()
     {
