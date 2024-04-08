@@ -3,16 +3,18 @@
 namespace Bcchicr\Framework\Http\Controllers;
 
 use Bcchicr\Framework\App\JsonMapper;
+use Bcchicr\Framework\Http\Controllers\Validator\Validator;
 use Bcchicr\Framework\Http\Foundation\Factory\ResponseFactory;
 use Bcchicr\Framework\Http\Foundation\Request;
+use Bcchicr\Framework\Models\Record;
 use Bcchicr\Framework\Views\View;
-use stdClass;
 
 final class RecordController
 {
     public function __construct(
         private JsonMapper $jsonMapper,
-        private ResponseFactory $responseFactory
+        private ResponseFactory $responseFactory,
+        private Validator $validator
     ) {
     }
 
@@ -49,15 +51,43 @@ final class RecordController
     }
     public function store(Request $request)
     {
-        $input = $request->getParsedBody();
+        $rawInput = $request->getParsedBody();
+        $validatedInput = [];
 
-        $record = new stdClass();
-        $record->firstName = $input['first-name'];
-        $record->lastName = $input['last-name'];
-        $record->phoneNumber = $input['phone-number'];
+        $validatedInput['first-name'] = $this->validator->validate(
+            $rawInput,
+            'first-name',
+            "required"
+        );
+        $validatedInput['last-name'] = $this->validator->validate(
+            $rawInput,
+            'last-name',
+            "required"
+        );
+        $validatedInput['phone-number'] = $this->validator->validate(
+            $rawInput,
+            'phone-number',
+            "required"
+        );
+
+        $errors = $this->validator->getErrors();
+        if (count($errors) > 0) {
+            session_start();
+            $_SESSION['errors'] = $errors;
+            return $this->responseFactory
+                ->createRedirectResponse('/records/create');
+        }
+
+
+        $record = new Record(
+            $validatedInput['first-name'],
+            $validatedInput['last-name'],
+            $validatedInput['phone-number']
+        );
 
         $this->jsonMapper->addRecord($record);
 
-        return $this->responseFactory->createRedirectResponse('/');
+        return $this->responseFactory
+            ->createRedirectResponse('/');
     }
 }
