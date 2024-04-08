@@ -12,14 +12,10 @@ $app = new Application(__DIR__);
  */
 $router = $app->get(Router::class);
 $router->get('/', [RecordController::class, 'index']);
+
+$router->get('/records/create', [RecordController::class, 'create']);
+$router->post('/records/store', [RecordController::class, 'store']);
+
 $router->post('/records/delete', [RecordController::class, 'delete']);
-
-// $router->get('/register', [UserController::class, 'create']);
-// $router->post('/register', [UserController::class, 'store']);
-
-// $router->get('/login', [UserController::class, 'login']);
-// $router->post('/login', [UserController::class, 'auth']);
-
-
 
 return $app;

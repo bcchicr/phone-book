@@ -15,7 +15,7 @@
     <div class="container mt-3">
       <div class="row">
         <div class="col-10 offset-1 col-md-8 offset-md-2">
-          <?php include __DIR__ . '/list.php' ?>
+          <?php include __DIR__ . '/components/list.php' ?>
         </div>
       </div>
     </div>
