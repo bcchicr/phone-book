@@ -1,14 +1,14 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Assembler;
+namespace Bcchicr\Framework\Models\Assembler;
 
 use PHPUnit\Framework\TestCase;
-use Bcchicr\StudentList\App\Application;
-use Bcchicr\StudentList\Models\Factory\UserFactory;
-use Bcchicr\StudentList\Models\StudentData;
-use Bcchicr\StudentList\Models\Identity\StudentDataIdentity;
-use Bcchicr\StudentList\Models\Identity\UserIdentity;
-use Bcchicr\StudentList\Models\User;
+use Bcchicr\Framework\App\Application;
+use Bcchicr\Framework\Models\Factory\UserFactory;
+use Bcchicr\Framework\Models\StudentData;
+use Bcchicr\Framework\Models\Identity\StudentDataIdentity;
+use Bcchicr\Framework\Models\Identity\UserIdentity;
+use Bcchicr\Framework\Models\User;
 use DateTime;
 
 class ModelAssemblerTest extends TestCase

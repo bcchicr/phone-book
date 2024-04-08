@@ -1,9 +1,9 @@
 <?php
 
-namespace Bcchicr\StudentList\Http;
+namespace Bcchicr\Framework\Http;
 
 use PHPUnit\Framework\TestCase;
-use Bcchicr\StudentList\Http\Foundation\Uri;
+use Bcchicr\Framework\Http\Foundation\Uri;
 
 class UriTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Identity;
+namespace Bcchicr\Framework\Models\Identity;
 
 use InvalidArgumentException;
 use RuntimeException;

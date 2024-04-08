@@ -1,9 +1,9 @@
 <?php
 
-namespace Bcchicr\StudentList\Http\Foundation\Factory;
+namespace Bcchicr\Framework\Http\Foundation\Factory;
 
-use Bcchicr\StudentList\Http\Foundation\RedirectResponse;
-use Bcchicr\StudentList\Http\Foundation\Response;
+use Bcchicr\Framework\Http\Foundation\RedirectResponse;
+use Bcchicr\Framework\Http\Foundation\Response;
 
 class ResponseFactory
 {

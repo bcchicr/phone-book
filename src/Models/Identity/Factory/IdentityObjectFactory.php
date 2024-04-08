@@ -1,8 +1,8 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Identity\Factory;
+namespace Bcchicr\Framework\Models\Identity\Factory;
 
-use Bcchicr\StudentList\Models\Identity\IdentityObject;
+use Bcchicr\Framework\Models\Identity\IdentityObject;
 
 abstract class IdentityObjectFactory
 {

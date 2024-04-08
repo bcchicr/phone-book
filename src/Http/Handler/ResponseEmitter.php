@@ -1,10 +1,10 @@
 <?php
 
-namespace Bcchicr\StudentList\Http\Handler;
+namespace Bcchicr\Framework\Http\Handler;
 
-use Bcchicr\StudentList\Http\Foundation\RedirectResponse;
+use Bcchicr\Framework\Http\Foundation\RedirectResponse;
 use RuntimeException;
-use Bcchicr\StudentList\Http\Foundation\Response;
+use Bcchicr\Framework\Http\Foundation\Response;
 
 class ResponseEmitter
 {

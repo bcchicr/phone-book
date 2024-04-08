@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcchicr\StudentList\App;
+namespace Bcchicr\Framework\App;
 
 use RuntimeException;
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Assembler;
+namespace Bcchicr\Framework\Models\Assembler;
 
 use PDO;
-use Bcchicr\StudentList\Models\Collection\StudentDataCollection;
-use Bcchicr\StudentList\Models\Factory\Persistance\StudentDataPersistanceFactory;
-use Bcchicr\StudentList\Models\Identity\IdentityObject;
-use Bcchicr\StudentList\Models\Identity\StudentDataIdentity;
-use Bcchicr\StudentList\Models\Model;
-use Bcchicr\StudentList\Models\StudentData;
+use Bcchicr\Framework\Models\Collection\StudentDataCollection;
+use Bcchicr\Framework\Models\Factory\Persistance\StudentDataPersistanceFactory;
+use Bcchicr\Framework\Models\Identity\IdentityObject;
+use Bcchicr\Framework\Models\Identity\StudentDataIdentity;
+use Bcchicr\Framework\Models\Model;
+use Bcchicr\Framework\Models\StudentData;
 
 class StudentDataAssembler extends ModelAssembler
 {

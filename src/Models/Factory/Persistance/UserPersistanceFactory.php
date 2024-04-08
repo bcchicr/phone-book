@@ -1,11 +1,11 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Factory\Persistance;
+namespace Bcchicr\Framework\Models\Factory\Persistance;
 
-use Bcchicr\StudentList\Models\Collection\Factory\UserCollectionFactory;
-use Bcchicr\StudentList\Models\Factory\Selection\UserSelection;
-use Bcchicr\StudentList\Models\Factory\Upsert\UserUpsert;
-use Bcchicr\StudentList\Models\Factory\UserFactory;
+use Bcchicr\Framework\Models\Collection\Factory\UserCollectionFactory;
+use Bcchicr\Framework\Models\Factory\Selection\UserSelection;
+use Bcchicr\Framework\Models\Factory\Upsert\UserUpsert;
+use Bcchicr\Framework\Models\Factory\UserFactory;
 
 class UserPersistanceFactory extends PersistanceFactory
 {

@@ -1,16 +1,16 @@
 <?php
 
-namespace Bcchicr\StudentList\Http;
+namespace Bcchicr\Framework\Http;
 
-use Bcchicr\StudentList\App\Application;
-use Bcchicr\StudentList\Http\Foundation\Request;
-use Bcchicr\StudentList\Http\Foundation\Response;
-use Bcchicr\StudentList\Http\Handler\RequestHandler;
-use Bcchicr\StudentList\Http\Handler\ResponseEmitter;
-use Bcchicr\StudentList\Http\Handler\Runner\Pipeline;
-use Bcchicr\StudentList\Http\Handler\Runner\RequestRunner;
-use Bcchicr\StudentList\Http\Router\Middleware\RouteMatcher;
-use Bcchicr\StudentList\Http\Router\Middleware\RouteDispatcher;
+use Bcchicr\Framework\App\Application;
+use Bcchicr\Framework\Http\Foundation\Request;
+use Bcchicr\Framework\Http\Foundation\Response;
+use Bcchicr\Framework\Http\Handler\RequestHandler;
+use Bcchicr\Framework\Http\Handler\ResponseEmitter;
+use Bcchicr\Framework\Http\Handler\Runner\Pipeline;
+use Bcchicr\Framework\Http\Handler\Runner\RequestRunner;
+use Bcchicr\Framework\Http\Router\Middleware\RouteMatcher;
+use Bcchicr\Framework\Http\Router\Middleware\RouteDispatcher;
 
 class Kernel
 {

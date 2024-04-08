@@ -1,16 +1,16 @@
 <?php
 
-namespace Bcchicr\StudentList\Http\Router\Middleware;
+namespace Bcchicr\Framework\Http\Router\Middleware;
 
 use RuntimeException;
-use Bcchicr\StudentList\Http\Router\Route;
-use Bcchicr\StudentList\Http\Foundation\Stream;
-use Bcchicr\StudentList\Http\Foundation\Request;
-use Bcchicr\StudentList\Http\Foundation\Response;
-use Bcchicr\StudentList\Http\Middleware\Middleware;
-use Bcchicr\StudentList\Http\Handler\RequestHandler;
-use Bcchicr\StudentList\Http\Middleware\Resolver\Resolver;
-use Bcchicr\StudentList\Http\Foundation\Factory\ResponseFactory;
+use Bcchicr\Framework\Http\Router\Route;
+use Bcchicr\Framework\Http\Foundation\Stream;
+use Bcchicr\Framework\Http\Foundation\Request;
+use Bcchicr\Framework\Http\Foundation\Response;
+use Bcchicr\Framework\Http\Middleware\Middleware;
+use Bcchicr\Framework\Http\Handler\RequestHandler;
+use Bcchicr\Framework\Http\Middleware\Resolver\Resolver;
+use Bcchicr\Framework\Http\Foundation\Factory\ResponseFactory;
 
 class RouteDispatcher implements Middleware
 {

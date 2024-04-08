@@ -1,11 +1,11 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Factory;
+namespace Bcchicr\Framework\Models\Factory;
 
 use DateTime;
-use Bcchicr\StudentList\Models\StudentData;
-use Bcchicr\StudentList\Models\Factory\ModelFactory;
-use Bcchicr\StudentList\Models\Watcher\IdentityWatcher;
+use Bcchicr\Framework\Models\StudentData;
+use Bcchicr\Framework\Models\Factory\ModelFactory;
+use Bcchicr\Framework\Models\Watcher\IdentityWatcher;
 
 class StudentDataFactory extends ModelFactory
 {

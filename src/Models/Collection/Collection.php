@@ -1,10 +1,10 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Collection;
+namespace Bcchicr\Framework\Models\Collection;
 
 use InvalidArgumentException;
-use Bcchicr\StudentList\Models\Factory\ModelFactory;
-use Bcchicr\StudentList\Models\Model;
+use Bcchicr\Framework\Models\Factory\ModelFactory;
+use Bcchicr\Framework\Models\Model;
 use Countable;
 use Generator;
 use IteratorAggregate;

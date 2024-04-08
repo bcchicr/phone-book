@@ -1,9 +1,9 @@
 <?php
 
-namespace Bcchicr\StudentList\Http;
+namespace Bcchicr\Framework\Http;
 
 use PHPUnit\Framework\TestCase;
-use Bcchicr\StudentList\Http\Foundation\Stream;
+use Bcchicr\Framework\Http\Foundation\Stream;
 
 class StreamTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcchicr\StudentList\Http\Controllers\Validator;
+namespace Bcchicr\Framework\Http\Controllers\Validator;
 
 use DateTime;
 

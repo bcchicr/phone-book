@@ -1,9 +1,9 @@
 <?php
 
-namespace Bcchicr\StudentList\Http\Handler;
+namespace Bcchicr\Framework\Http\Handler;
 
-use Bcchicr\StudentList\Http\Foundation\Request;
-use Bcchicr\StudentList\Http\Foundation\Response;
+use Bcchicr\Framework\Http\Foundation\Request;
+use Bcchicr\Framework\Http\Foundation\Response;
 
 interface RequestHandler
 {

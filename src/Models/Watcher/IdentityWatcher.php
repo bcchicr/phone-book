@@ -1,9 +1,9 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Watcher;
+namespace Bcchicr\Framework\Models\Watcher;
 
 
-use Bcchicr\StudentList\Models\Model;
+use Bcchicr\Framework\Models\Model;
 
 class IdentityWatcher
 {

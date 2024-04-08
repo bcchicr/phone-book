@@ -1,7 +1,7 @@
 <?php
 
-use Bcchicr\StudentList\Http\Kernel;
-use Bcchicr\StudentList\Http\Foundation\Factory\RequestFactory;
+use Bcchicr\Framework\Http\Kernel;
+use Bcchicr\Framework\Http\Foundation\Factory\RequestFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Factory\Upsert;
+namespace Bcchicr\Framework\Models\Factory\Upsert;
 
-use Bcchicr\StudentList\Models\Model;
-use Bcchicr\StudentList\Models\User;
+use Bcchicr\Framework\Models\Model;
+use Bcchicr\Framework\Models\User;
 use InvalidArgumentException;
 
 class UserUpsert extends UpsertFactory

@@ -1,13 +1,13 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Assembler;
+namespace Bcchicr\Framework\Models\Assembler;
 
 use PDO;
 use PDOStatement;
-use Bcchicr\StudentList\Models\Model;
-use Bcchicr\StudentList\Models\Collection\Collection;
-use Bcchicr\StudentList\Models\Identity\IdentityObject;
-use Bcchicr\StudentList\Models\Factory\Persistance\PersistanceFactory;
+use Bcchicr\Framework\Models\Model;
+use Bcchicr\Framework\Models\Collection\Collection;
+use Bcchicr\Framework\Models\Identity\IdentityObject;
+use Bcchicr\Framework\Models\Factory\Persistance\PersistanceFactory;
 
 abstract class ModelAssembler
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Factory\Upsert;
+namespace Bcchicr\Framework\Models\Factory\Upsert;
 
-use Bcchicr\StudentList\Models\Model;
-use Bcchicr\StudentList\Models\StudentData;
+use Bcchicr\Framework\Models\Model;
+use Bcchicr\Framework\Models\StudentData;
 use DateTimeInterface;
 use InvalidArgumentException;
 

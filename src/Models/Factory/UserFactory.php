@@ -1,11 +1,11 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Factory;
+namespace Bcchicr\Framework\Models\Factory;
 
-use Bcchicr\StudentList\Models\User;
-use Bcchicr\StudentList\Models\Watcher\IdentityWatcher;
-use Bcchicr\StudentList\Models\Assembler\StudentDataAssembler;
-use Bcchicr\StudentList\Models\Identity\Factory\StudentDataIdentityFactory;
+use Bcchicr\Framework\Models\User;
+use Bcchicr\Framework\Models\Watcher\IdentityWatcher;
+use Bcchicr\Framework\Models\Assembler\StudentDataAssembler;
+use Bcchicr\Framework\Models\Identity\Factory\StudentDataIdentityFactory;
 
 class UserFactory extends ModelFactory
 {

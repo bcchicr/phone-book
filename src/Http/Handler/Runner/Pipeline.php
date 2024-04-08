@@ -1,8 +1,8 @@
 <?php
 
-namespace Bcchicr\StudentList\Http\Handler\Runner;
+namespace Bcchicr\Framework\Http\Handler\Runner;
 
-use Bcchicr\StudentList\Http\Middleware\Middleware;
+use Bcchicr\Framework\Http\Middleware\Middleware;
 use RuntimeException;
 
 class Pipeline

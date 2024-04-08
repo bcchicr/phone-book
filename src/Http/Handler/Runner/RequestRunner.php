@@ -1,10 +1,10 @@
 <?php
 
-namespace Bcchicr\StudentList\Http\Handler\Runner;
+namespace Bcchicr\Framework\Http\Handler\Runner;
 
-use Bcchicr\StudentList\Http\Foundation\Request;
-use Bcchicr\StudentList\Http\Foundation\Response;
-use Bcchicr\StudentList\Http\Handler\RequestHandler;
+use Bcchicr\Framework\Http\Foundation\Request;
+use Bcchicr\Framework\Http\Foundation\Response;
+use Bcchicr\Framework\Http\Handler\RequestHandler;
 
 class RequestRunner implements RequestHandler
 {

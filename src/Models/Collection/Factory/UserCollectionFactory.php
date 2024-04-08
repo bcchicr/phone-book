@@ -1,9 +1,9 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Collection\Factory;
+namespace Bcchicr\Framework\Models\Collection\Factory;
 
-use Bcchicr\StudentList\Models\Factory\UserFactory;
-use Bcchicr\StudentList\Models\Collection\UserCollection;
+use Bcchicr\Framework\Models\Factory\UserFactory;
+use Bcchicr\Framework\Models\Collection\UserCollection;
 
 class UserCollectionFactory extends CollectionFactory
 {

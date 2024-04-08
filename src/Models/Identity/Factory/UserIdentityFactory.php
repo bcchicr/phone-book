@@ -1,8 +1,8 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Identity\Factory;
+namespace Bcchicr\Framework\Models\Identity\Factory;
 
-use Bcchicr\StudentList\Models\Identity\UserIdentity;
+use Bcchicr\Framework\Models\Identity\UserIdentity;
 
 class UserIdentityFactory extends IdentityObjectFactory
 {

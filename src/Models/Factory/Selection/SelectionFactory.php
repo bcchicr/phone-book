@@ -1,8 +1,8 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Factory\Selection;
+namespace Bcchicr\Framework\Models\Factory\Selection;
 
-use Bcchicr\StudentList\Models\Identity\IdentityObject;
+use Bcchicr\Framework\Models\Identity\IdentityObject;
 
 abstract class SelectionFactory
 {

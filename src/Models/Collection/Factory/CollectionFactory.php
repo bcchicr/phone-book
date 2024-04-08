@@ -1,8 +1,8 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Collection\Factory;
+namespace Bcchicr\Framework\Models\Collection\Factory;
 
-use Bcchicr\StudentList\Models\Collection\Collection;
+use Bcchicr\Framework\Models\Collection\Collection;
 
 abstract class CollectionFactory
 {

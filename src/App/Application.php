@@ -1,12 +1,12 @@
 <?php
 
-namespace Bcchicr\StudentList\App;
+namespace Bcchicr\Framework\App;
 
 use PDO;
 use PDOException;
 use RuntimeException;
 use Bcchicr\Container\Container;
-use Bcchicr\StudentList\App\Conf;
+use Bcchicr\Framework\App\Conf;
 
 class Application extends Container
 {

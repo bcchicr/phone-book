@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcchicr\StudentList\Models;
+namespace Bcchicr\Framework\Models;
 
 use SplObserver;
 use SplSubject;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Bcchicr\StudentList\Http\Router;
+namespace Bcchicr\Framework\Http\Router;
 
-use Bcchicr\StudentList\App\Application;
-use Bcchicr\StudentList\Http\Foundation\Request;
+use Bcchicr\Framework\App\Application;
+use Bcchicr\Framework\Http\Foundation\Request;
 use InvalidArgumentException;
 use ReflectionClass;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Factory\Upsert;
+namespace Bcchicr\Framework\Models\Factory\Upsert;
 
-use Bcchicr\StudentList\Models\Model;
+use Bcchicr\Framework\Models\Model;
 
 abstract class UpsertFactory
 {

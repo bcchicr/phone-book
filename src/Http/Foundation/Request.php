@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcchicr\StudentList\Http\Foundation;
+namespace Bcchicr\Framework\Http\Foundation;
 
 class Request extends Message
 {

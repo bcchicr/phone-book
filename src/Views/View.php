@@ -1,8 +1,8 @@
 <?php
 
-namespace Bcchicr\StudentList\Views;
+namespace Bcchicr\Framework\Views;
 
-use Bcchicr\StudentList\Http\Foundation\Stream;
+use Bcchicr\Framework\Http\Foundation\Stream;
 
 class View
 {

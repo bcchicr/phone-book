@@ -1,10 +1,10 @@
 <?php
 
-namespace Bcchicr\StudentList\Models\Factory\Selection;
+namespace Bcchicr\Framework\Models\Factory\Selection;
 
 use InvalidArgumentException;
-use Bcchicr\StudentList\Models\Identity\IdentityObject;
-use Bcchicr\StudentList\Models\Identity\StudentDataIdentity;
+use Bcchicr\Framework\Models\Identity\IdentityObject;
+use Bcchicr\Framework\Models\Identity\StudentDataIdentity;
 
 class StudentDataSelection extends SelectionFactory
 {

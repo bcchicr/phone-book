@@ -1,11 +1,11 @@
 <?php
 
-namespace Bcchicr\StudentList\Http\Middleware\Resolver;
+namespace Bcchicr\Framework\Http\Middleware\Resolver;
 
-use Bcchicr\StudentList\Http\Foundation\Request;
-use Bcchicr\StudentList\Http\Handler\RequestHandler;
-use Bcchicr\StudentList\Http\Foundation\Response;
-use Bcchicr\StudentList\Http\Middleware\Middleware;
+use Bcchicr\Framework\Http\Foundation\Request;
+use Bcchicr\Framework\Http\Handler\RequestHandler;
+use Bcchicr\Framework\Http\Foundation\Response;
+use Bcchicr\Framework\Http\Middleware\Middleware;
 use Closure;
 use InvalidArgumentException;
 use RuntimeException;
